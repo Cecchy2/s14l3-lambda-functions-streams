@@ -10,6 +10,8 @@ public class Main {
         Random random = new Random();
         Random random1 = new Random();
         Faker f = new Faker();
+        LocalDate today = LocalDate.now();
+        System.out.println("Today " + today);
 
         List<Product> prodotti = new ArrayList<>();
         prodotti.add(new Product(random.nextLong(1000000, 1900000), f.harryPotter().book(), "book", 120.00));
@@ -41,12 +43,15 @@ public class Main {
         System.out.println("---------------------------------------Ordine di Prova------------------------------------");
         System.out.println("Ordine prova order1: " + order1);
 
-        //-----------------lista di ordini------------
+        //--------------------------------------------------------LISTA ORDINI------------------------------------------
         List<Order> orders = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
+
             // Genera una lista casuale di prodotti per l'ordine
             List<Product> randomProducts = new ArrayList<>();
-            int numProducts = random.nextInt(prodotti.size()) + 1; // Numero casuale di prodotti per l'ordine
+
+            // Numero casuale di prodotti per l'ordine
+            int numProducts = random.nextInt(prodotti.size()) + 1;
             for (int j = 0; j < numProducts; j++) {
                 randomProducts.add(prodotti.get(random.nextInt(prodotti.size())));
             }
@@ -99,8 +104,8 @@ public class Main {
 
         System.out.println("---------------------------------------ESERCIZIO 4 ------------------------------------");
 
-        LocalDate startDate = LocalDate.of(2021, 2, 1);
-        LocalDate endDate = LocalDate.of(2021, 4, 1);
+        LocalDate startDate = LocalDate.now().minusDays(5);
+        LocalDate endDate = LocalDate.now();
 
         List<Product> prodottiDaCustomersLivello2 = orders.stream()
                 .filter(order -> order.getCustomer().getTier() == 2)
