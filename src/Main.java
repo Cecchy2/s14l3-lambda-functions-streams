@@ -99,7 +99,17 @@ public class Main {
 
         System.out.println("---------------------------------------ESERCIZIO 4 ------------------------------------");
 
-        
+        LocalDate startDate = LocalDate.of(2021, 2, 1);
+        LocalDate endDate = LocalDate.of(2021, 4, 1);
+
+        List<Product> prodottiDaCustomersLivello2 = orders.stream()
+                .filter(order -> order.getCustomer().getTier() == 2)
+                .filter(order -> !order.getOrderDate().isBefore(startDate) && !order.getOrderDate().isAfter(endDate))
+                .flatMap(order -> order.getProducts().stream())
+                .toList();
+
+        prodottiDaCustomersLivello2.forEach(System.out::println);
+
     }
 }
 
