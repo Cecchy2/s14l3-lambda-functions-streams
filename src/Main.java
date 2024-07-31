@@ -26,24 +26,24 @@ public class Main {
         prodotti.add(new Product(random.nextLong(1000000, 1900000), "BabyBath", "baby", 160.00));
         prodotti.add(new Product(random.nextLong(1000000, 1900000), "SurfBoard", "boys", 320.00));
 
+        //-----------------------------------------------------creo Customers Random------------------------------------
         List<Customer> customers = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             customers.add(new Customer(random.nextLong(1000000, 1900000), f.backToTheFuture().character() + " " + f.elderScrolls().creature(), random1.nextInt(1, 3)));
         }
-        System.out.println("---------------------------------------Lista Customers------------------------------------");
+        System.out.println("---------------------------------Lista Customers Random------------------------------------");
         customers.forEach(System.out::println);
 
 
+        //-----------------------------------------------------Ordine prova---------------------------------------------
         List<Product> orderProducts1 = new ArrayList<>();
         orderProducts1.add(prodotti.get(0));
         orderProducts1.add(prodotti.get(1));
-
-
         Order order1 = new Order(random.nextLong(1000000, 1900000), Status.shipped, LocalDate.now(), LocalDate.now().plusDays(5), customers.get(0), orderProducts1);
         System.out.println("---------------------------------------Ordine di Prova------------------------------------");
         System.out.println("Ordine prova order1: " + order1);
 
-        //--------------------------------------------------------LISTA ORDINI------------------------------------------
+        //--------------------------------------------------LISTA ORDINI Random-----------------------------------------
         List<Order> orders = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
 
@@ -66,28 +66,27 @@ public class Main {
             orders.add(new Order(random.nextLong(1000000, 1900000), Status.shipped, orderDate, deliveryDate, randomCustomer, randomProducts));
         }
 
-        System.out.println("---------------------------------------Ordini generati random------------------------------------");
+        System.out.println("-----------------------------------Stampo ordini generati random--------------------------");
         for (Order order : orders) {
             System.out.println(order);
         }
 
 
-        System.out.println("---------------------------------------ESERCIZIO 1 ------------------------------------");
+        System.out.println("---------------------------------------ESERCIZIO 1 ---------------------------------------");
 
         List<Product> booksOver100 = prodotti.stream()
-                .filter(element -> element.getCategory().equalsIgnoreCase("book") && element.getPrice() > 100)
+                .filter(element -> element.getCategory().equals("book") && element.getPrice() > 100)
                 .toList();
+        booksOver100.forEach(System.out::println);
 
-        System.out.println(booksOver100);
-
-        System.out.println("---------------------------------------ESERCIZIO 2 ------------------------------------");
+        System.out.println("---------------------------------------ESERCIZIO 2 ---------------------------------------");
 
         List<Order> ordiniBaby = orders.stream().filter(order -> order.getProducts().stream()
                 .anyMatch(product -> product.getCategory().equals("baby"))).toList();
 
         ordiniBaby.forEach(System.out::println);
 
-        System.out.println("---------------------------------------ESERCIZIO 3 ------------------------------------");
+        System.out.println("---------------------------------------ESERCIZIO 3 ---------------------------------------");
 
         List<Product> boysProduct = prodotti.stream()
                 .filter(product -> product.getCategory()
@@ -102,7 +101,7 @@ public class Main {
         boysProduct.forEach(System.out::println);
 
 
-        System.out.println("---------------------------------------ESERCIZIO 4 ------------------------------------");
+        System.out.println("---------------------------------------ESERCIZIO 4 ---------------------------------------");
 
         LocalDate startDate = LocalDate.now().minusDays(5);
         LocalDate endDate = LocalDate.now();
